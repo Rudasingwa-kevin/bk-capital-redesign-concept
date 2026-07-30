@@ -52,7 +52,7 @@ export default function MarketTicker() {
   }, []);
 
   return (
-    <div className="bg-bk-navy text-white text-[12px] leading-[16px]">
+    <div className="bg-bk-navy text-white text-[12px] leading-[16px] overflow-hidden">
       <div className="flex items-center h-8">
         {/* Status pill */}
         <div className="flex-shrink-0 flex items-center gap-2 px-4 h-full bg-bk-midnight border-r border-white/10">
@@ -62,10 +62,9 @@ export default function MarketTicker() {
           </span>
         </div>
 
-        {/* Scrolling area — CSS handles the seamless loop */}
+        {/* Scrolling area — overflow hidden on the parent clips the scroll */}
         <div className="flex-1 overflow-hidden">
           <div className="ticker-animate flex items-center whitespace-nowrap">
-            {/* Two copies of the row for seamless loop */}
             <div className="flex items-center"><TickerRow /></div>
             <div className="flex items-center"><TickerRow /></div>
           </div>

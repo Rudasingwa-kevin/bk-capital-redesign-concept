@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 /* ─── Data ─── */
@@ -16,6 +17,8 @@ const chartData = [
   { m: "Jul", v: 112 }, { m: "Aug", v: 115 }, { m: "Sep", v: 110 },
   { m: "Oct", v: 118 }, { m: "Nov", v: 122 }, { m: "Dec", v: 124 },
 ];
+
+const timeframes = ["6M", "1Y", "3Y", "ALL"];
 
 /* ─── Chart (SVG) ─── */
 function Chart() {
@@ -45,10 +48,6 @@ function Chart() {
           <stop offset="0%" stopColor="#034EA2" stopOpacity="0.12" />
           <stop offset="100%" stopColor="#034EA2" stopOpacity="0" />
         </linearGradient>
-        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#034EA2" />
-          <stop offset="100%" stopColor="#C9A227" />
-        </linearGradient>
       </defs>
 
       {[0, 0.25, 0.5, 0.75, 1].map((r) => (
@@ -67,7 +66,7 @@ function Chart() {
       ))}
 
       <path d={area} fill="url(#areaGrad)" />
-      <path d={line} fill="none" stroke="url(#lineGrad)" strokeWidth="2" strokeLinecap="round" />
+      <path d={line} fill="none" stroke="#034EA2" strokeWidth="2" strokeLinecap="round" />
       <circle cx={last.x} cy={last.y} r="3.5" fill="#C9A227" />
       <circle cx={last.x} cy={last.y} r="6" fill="#C9A227" opacity="0.2" />
     </svg>
@@ -76,8 +75,10 @@ function Chart() {
 
 /* ─── Component ─── */
 export default function PerformanceDashboard() {
+  const [activeTimeframe, setActiveTimeframe] = useState("1Y");
+
   return (
-    <section id="research" className="bg-bk-light">
+    <section id="research" className="bg-white">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-24 lg:py-32">
         {/* Section header */}
         <motion.div
@@ -92,7 +93,7 @@ export default function PerformanceDashboard() {
           </h2>
         </motion.div>
 
-        {/* Stats — unified card system */}
+        {/* Stats */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((s, i) => (
             <motion.div
@@ -101,7 +102,7 @@ export default function PerformanceDashboard() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-white rounded-[20px] border border-bk-border p-6"
+              className="bg-bk-light rounded-[20px] border border-bk-border p-6"
             >
               <div className="text-[12px] leading-[16px] text-bk-muted">{s.label}</div>
               <div className="text-[28px] leading-[36px] font-bold text-bk-navy tracking-[-0.01em] mt-2">
@@ -112,13 +113,13 @@ export default function PerformanceDashboard() {
           ))}
         </div>
 
-        {/* Chart card — same system */}
+        {/* Chart card */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-6 bg-white rounded-[20px] border border-bk-border p-6 lg:p-8"
+          className="mt-6 bg-bk-light rounded-[20px] border border-bk-border p-6 lg:p-8"
         >
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -126,14 +127,17 @@ export default function PerformanceDashboard() {
               <p className="text-[12px] leading-[16px] text-bk-muted mt-1">Net of fees, in RWF</p>
             </div>
             <div className="flex gap-1">
-              {["6M", "1Y", "3Y", "ALL"].map((p) => (
+              {timeframes.map((tf) => (
                 <button
-                  key={p}
+                  key={tf}
+                  onClick={() => setActiveTimeframe(tf)}
                   className={`px-3 py-1 text-[12px] leading-[16px] font-medium rounded-[8px] transition-colors ${
-                    p === "1Y" ? "bg-bk-navy text-white" : "text-bk-muted hover:bg-bk-light"
+                    tf === activeTimeframe
+                      ? "bg-bk-navy text-white"
+                      : "text-bk-muted hover:bg-bk-navy/10"
                   }`}
                 >
-                  {p}
+                  {tf}
                 </button>
               ))}
             </div>
@@ -142,7 +146,7 @@ export default function PerformanceDashboard() {
           <div className="mt-4 pt-4 border-t border-bk-border flex items-center justify-between text-[12px] leading-[16px] text-bk-muted">
             <span>Jan 2024 — Dec 2024</span>
             <span className="flex items-center gap-2">
-              <span className="w-3 h-[2px] bg-gradient-to-r from-bk-blue to-bk-gold rounded" />
+              <span className="w-3 h-[2px] bg-bk-blue rounded" />
               AGUKA Fund NAV
             </span>
           </div>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 
 const links = [
   { label: "About", href: "#about" },
@@ -28,23 +27,16 @@ export default function Navigation() {
     >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <a href="/" className="flex items-center gap-3">
-            <Image
-              src="/bkc-logo.png"
-              alt="BK Capital"
-              width={32}
-              height={32}
-              className="w-8 h-8 object-contain"
-              priority
-            />
+            <div className="w-8 h-8 bg-bk-blue rounded-[8px] flex items-center justify-center">
+              <span className="text-white font-bold text-[13px] tracking-tight">BKC</span>
+            </div>
             <span className="font-semibold text-bk-navy text-[16px] leading-[24px] tracking-tight hidden sm:block">
               BK Capital
             </span>
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-2">
             {links.map((link) => (
               <a
                 key={link.label}
@@ -56,11 +48,10 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* CTA + mobile */}
           <div className="flex items-center gap-3">
             <a
               href="https://onboarding.bkcapital.rw/"
-              className="hidden md:inline-flex items-center bg-bk-gold hover:bg-bk-gold-soft text-bk-navy font-semibold text-[13px] leading-[16px] px-4 py-2 rounded-[8px] transition-colors"
+              className="hidden md:inline-flex items-center bg-bk-gold hover:bg-bk-gold-soft text-bk-navy font-semibold text-[13px] leading-[16px] px-4 py-2 rounded-[8px] transition-colors min-h-[36px]"
             >
               Investor Portal
             </a>
@@ -83,7 +74,6 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

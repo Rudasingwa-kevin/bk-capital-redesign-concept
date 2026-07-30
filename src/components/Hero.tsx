@@ -16,7 +16,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8 py-24 lg:py-32">
         <div className="max-w-[640px]">
-          {/* Eyebrow — Caption style */}
+          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function Hero() {
             direct access to Rwanda&apos;s capital markets for individuals and institutions alike.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs — proper button shapes */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -61,7 +61,7 @@ export default function Hero() {
           >
             <a
               href="#about"
-              className="inline-flex items-center justify-center gap-2 bg-bk-gold hover:bg-bk-gold-soft text-bk-navy font-semibold text-[13px] leading-[16px] px-6 py-3 rounded-[8px] transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-bk-gold hover:bg-bk-gold-soft text-bk-navy font-semibold text-[14px] leading-[20px] px-6 py-3 rounded-[8px] transition-colors min-h-[44px]"
             >
               Explore Products
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -70,19 +70,19 @@ export default function Hero() {
             </a>
             <a
               href="#footer"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-medium text-[13px] leading-[16px] px-6 py-3 rounded-[8px] transition-colors hover:bg-white/5"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/50 hover:bg-white/5 text-white font-semibold text-[14px] leading-[20px] px-6 py-3 rounded-[8px] transition-colors min-h-[44px]"
             >
               Speak with an Advisor
             </a>
           </motion.div>
         </div>
 
-        {/* Stats row — aligned to same left edge */}
+        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.0 }}
-          className="mt-16 pt-6 border-t border-white/10 grid grid-cols-3 gap-8 max-w-[480px]"
+          className="mt-16 grid grid-cols-3 gap-8 max-w-[480px]"
         >
           {[
             { label: "Assets Under Mgmt", value: "FRw 130.8B" },
