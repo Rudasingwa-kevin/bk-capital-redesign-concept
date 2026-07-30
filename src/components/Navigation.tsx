@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const links = [
   { label: "About", href: "#about" },
@@ -28,9 +29,14 @@ export default function Navigation() {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <a href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-bk-blue rounded-[8px] flex items-center justify-center">
-              <span className="text-white font-bold text-[13px] tracking-tight">BKC</span>
-            </div>
+            <Image
+              src="/bkc-logo.png"
+              alt="BK Capital"
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain"
+              priority
+            />
             <span className="font-semibold text-bk-navy text-[16px] leading-[24px] tracking-tight hidden sm:block">
               BK Capital
             </span>
