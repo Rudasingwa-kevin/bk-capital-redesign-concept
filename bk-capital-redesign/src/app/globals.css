@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --color-bk-blue: #034EA2;
+  --color-bk-blue-dark: #023A7A;
+  --color-bk-navy: #071A2F;
+  --color-bk-midnight: #0E2745;
+  --color-bk-gold: #C9A227;
+  --color-bk-gold-soft: #E4C86A;
+  --color-bk-light: #F4F5F8;
+  --color-bk-white: #FFFFFF;
+  --color-bk-text: #111827;
+  --color-bk-muted: #6B7280;
+  --color-bk-border: #E5E7EB;
+  --color-bk-card: #FFFFFF;
+  --color-bk-surface: #F9FAFB;
+
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Sans', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-bk-text);
+  background: var(--color-bk-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bk-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bk-blue);
+  border-radius: 3px;
+}
+
+/* Market ticker animation */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-animate {
+  animation: ticker-scroll 40s linear infinite;
+}
+
+.ticker-animate:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle gradient overlay for hero */
+.hero-gradient {
+  background: linear-gradient(135deg, rgba(3, 78, 162, 0.92) 0%, rgba(7, 26, 47, 0.95) 50%, rgba(14, 39, 69, 0.98) 100%);
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Gold underline accent */
+.gold-underline {
+  position: relative;
+}
+.gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-bk-gold);
+  border-radius: 2px;
+}
+
+/* Section divider */
+.section-divider {
+  width: 64px;
+  height: 3px;
+  background: var(--color-bk-gold);
+  border-radius: 2px;
+}
+
+/* Stat counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-animate {
+  animation: count-up 0.6s ease-out forwards;
+}
