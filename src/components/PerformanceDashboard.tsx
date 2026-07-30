@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 /* ─── Data ─── */
 const stats = [
   { label: "Year-to-Date Return", value: "12.4%", sub: "+2.1% vs benchmark", up: true },
-  { label: "Assets Under Management", value: "FRw 130.8B", sub: "+18.3% YoY", up: true },
-  { label: "Institutional Clients", value: "240+", sub: "+35 new in 2024", up: true },
-  { label: "Market Outlook", value: "Bullish", sub: "Stable macro environment", up: true },
+  { label: "Assets Under Management", value: "FRw 130.8B", sub: "+18.3% year-on-year", up: true },
+  { label: "Institutional Clients", value: "240+", sub: "+35 added in 2024", up: true },
+  { label: "Total Return Index", value: "399.63", sub: "BK Capital TRI", up: true },
 ];
 
 const chartData = [
@@ -77,7 +77,7 @@ function Chart() {
 /* ─── Component ─── */
 export default function PerformanceDashboard() {
   return (
-    <section id="products" className="bg-bk-light">
+    <section id="research" className="bg-bk-light">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-24 lg:py-32">
         {/* Section header */}
         <motion.div

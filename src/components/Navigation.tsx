@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { label: "About", href: "#about" },
-  { label: "Products", href: "#products" },
-  { label: "Research", href: "#research" },
-  { label: "Contact", href: "#contact" },
+  { label: "Performance", href: "#research" },
+  { label: "Contact", href: "#footer" },
 ];
 
 export default function Navigation() {

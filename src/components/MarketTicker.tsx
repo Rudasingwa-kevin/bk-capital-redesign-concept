@@ -13,6 +13,20 @@ const marketData = [
   { symbol: "KCB", value: "RWF 500", change: "+0.65%", up: true },
 ];
 
+function TickerRow() {
+  return (
+    <>
+      {marketData.map((item) => (
+        <span key={item.symbol} className="inline-flex items-center gap-2 px-4">
+          <span className="font-semibold">{item.symbol}</span>
+          <span className="text-white/60">{item.value}</span>
+          <span className={item.up ? "text-emerald-400" : "text-red-400"}>{item.change}</span>
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function MarketTicker() {
   const [time, setTime] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -37,11 +51,10 @@ export default function MarketTicker() {
     return () => clearInterval(i);
   }, []);
 
-  const items = [...marketData, ...marketData];
-
   return (
     <div className="bg-bk-navy text-white text-[12px] leading-[16px]">
       <div className="flex items-center h-8">
+        {/* Status pill */}
         <div className="flex-shrink-0 flex items-center gap-2 px-4 h-full bg-bk-midnight border-r border-white/10">
           <span className={`w-1.5 h-1.5 rounded-full ${isOpen ? "bg-emerald-400" : "bg-red-400"}`} />
           <span className="font-medium uppercase tracking-wider text-[10px]">
@@ -49,18 +62,16 @@ export default function MarketTicker() {
           </span>
         </div>
 
+        {/* Scrolling area — CSS handles the seamless loop */}
         <div className="flex-1 overflow-hidden">
           <div className="ticker-animate flex items-center whitespace-nowrap">
-            {items.map((item, i) => (
-              <span key={`${item.symbol}-${i}`} className="inline-flex items-center gap-2 px-4">
-                <span className="font-semibold">{item.symbol}</span>
-                <span className="text-white/60">{item.value}</span>
-                <span className={item.up ? "text-emerald-400" : "text-red-400"}>{item.change}</span>
-              </span>
-            ))}
+            {/* Two copies of the row for seamless loop */}
+            <div className="flex items-center"><TickerRow /></div>
+            <div className="flex items-center"><TickerRow /></div>
           </div>
         </div>
 
+        {/* Time */}
         <div className="flex-shrink-0 px-4 h-full bg-bk-midnight border-l border-white/10 font-mono text-white/50">
           {time}
         </div>

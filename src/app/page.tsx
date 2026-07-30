@@ -1,6 +1,7 @@
 import MarketTicker from "@/components/MarketTicker";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import WhatWeOffer from "@/components/WhatWeOffer";
 import PerformanceDashboard from "@/components/PerformanceDashboard";
 import Footer from "@/components/Footer";
 
@@ -10,6 +11,7 @@ export default function Home() {
       <MarketTicker />
       <Navigation />
       <Hero />
+      <WhatWeOffer />
       <PerformanceDashboard />
       <Footer />
     </main>

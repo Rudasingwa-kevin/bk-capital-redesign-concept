@@ -48,8 +48,8 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="text-[16px] leading-[24px] text-white/60 mb-8 max-w-[480px]"
           >
-            Institutional-grade investment products, wealth management, and corporate advisory
-            — positioned to unlock Rwanda&apos;s long-term capital growth.
+            From AGUKA Unit Trust to corporate bond issuances, BK Capital provides
+            direct access to Rwanda&apos;s capital markets for individuals and institutions alike.
           </motion.p>
 
           {/* CTAs */}
@@ -60,7 +60,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-3"
           >
             <a
-              href="#products"
+              href="#about"
               className="inline-flex items-center justify-center gap-2 bg-bk-gold hover:bg-bk-gold-soft text-bk-navy font-semibold text-[13px] leading-[16px] px-6 py-3 rounded-[8px] transition-colors"
             >
               Explore Products
@@ -69,7 +69,7 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="#contact"
+              href="#footer"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-medium text-[13px] leading-[16px] px-6 py-3 rounded-[8px] transition-colors hover:bg-white/5"
             >
               Speak with an Advisor
