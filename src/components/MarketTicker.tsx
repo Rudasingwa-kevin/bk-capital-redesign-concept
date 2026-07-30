@@ -2,25 +2,26 @@
 
 import { useState, useEffect } from "react";
 
-const stocks = [
-  { s: "RSI", v: "164.81", c: "+0.42%", up: true },
-  { s: "BOK", v: "RWF 490", c: "+1.20%", up: true },
-  { s: "BLR", v: "RWF 326", c: "+0.00%", up: false },
-  { s: "CMR", v: "RWF 160", c: "+0.55%", up: true },
-  { s: "EQTY", v: "RWF 500", c: "+0.80%", up: true },
-  { s: "MTNR", v: "RWF 127", c: "-0.30%", up: false },
-  { s: "NMG", v: "RWF 1,200", c: "+0.00%", up: false },
-  { s: "KCB", v: "RWF 500", c: "+0.65%", up: true },
+const items = [
+  { symbol: "RSI", name: "All Share Index", value: "164.81", change: "+0.42%", up: true },
+  { symbol: "BOK", name: "BK Group", value: "RWF 490", change: "+1.20%", up: true },
+  { symbol: "BLR", name: "Bralirwa", value: "RWF 326", change: "+0.00%", up: false },
+  { symbol: "CMR", name: "Cimerwa", value: "RWF 160", change: "+0.55%", up: true },
+  { symbol: "EQTY", name: "Equity Group", value: "RWF 500", change: "+0.80%", up: true },
+  { symbol: "MTNR", name: "MTN Rwanda", value: "RWF 127", change: "-0.30%", up: false },
+  { symbol: "NMG", name: "Nation Media", value: "RWF 1,200", change: "+0.00%", up: false },
+  { symbol: "KCB", name: "KCB Group", value: "RWF 500", change: "+0.65%", up: true },
+  { symbol: "USD/RWF", name: "Exchange Rate", value: "1,345", change: "-0.12%", up: false },
 ];
 
-function Row() {
+function TickerRow() {
   return (
     <>
-      {stocks.map((x) => (
-        <span key={x.s} className="inline-flex items-center gap-2 px-4">
-          <span className="font-semibold">{x.s}</span>
-          <span className="text-white/50">{x.v}</span>
-          <span className={x.up ? "text-emerald-400" : "text-red-400"}>{x.c}</span>
+      {items.map((x) => (
+        <span key={x.symbol} className="inline-flex items-center gap-6 px-6">
+          <span className="font-semibold text-white/90">{x.symbol}</span>
+          <span className="text-white/50 tabular-nums">{x.value}</span>
+          <span className={`tabular-nums ${x.up ? "text-emerald-400" : "text-red-400"}`}>{x.change}</span>
         </span>
       ))}
     </>
@@ -28,7 +29,7 @@ function Row() {
 }
 
 export default function MarketTicker() {
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState("--:--");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -44,19 +45,27 @@ export default function MarketTicker() {
   }, []);
 
   return (
-    <div className="bg-bk-navy text-white text-[12px] leading-[16px]">
-      <div className="flex items-center h-8">
-        <div className="flex-shrink-0 flex items-center gap-2 px-4 h-full bg-bk-midnight border-r border-white/10">
+    <div className="bg-bk-navy text-[11px] leading-[16px] tracking-[0.01em]">
+      <div className="flex items-center h-9">
+        {/* Status */}
+        <div className="flex-shrink-0 flex items-center gap-2.5 px-5 h-full bg-bk-midnight border-r border-white/[0.06]">
           <span className={`w-1.5 h-1.5 rounded-full ${open ? "bg-emerald-400" : "bg-red-400"}`} />
-          <span className="font-medium uppercase tracking-wider text-[10px]">{open ? "Open" : "Closed"}</span>
+          <span className="font-medium text-white/60 uppercase tracking-[0.08em]">{open ? "RSE Open" : "RSE Closed"}</span>
         </div>
+
+        {/* Scroll */}
         <div className="flex-1 overflow-hidden">
-          <div className="ticker-animate flex items-center whitespace-nowrap">
-            <div className="flex items-center"><Row /></div>
-            <div className="flex items-center"><Row /></div>
+          <div className="ticker-scroll flex items-center whitespace-nowrap">
+            <div className="flex items-center"><TickerRow /></div>
+            <div className="flex items-center"><TickerRow /></div>
           </div>
         </div>
-        <div className="flex-shrink-0 px-4 h-full bg-bk-midnight border-l border-white/10 font-mono text-white/50">{time}</div>
+
+        {/* Time */}
+        <div className="flex-shrink-0 px-5 h-full bg-bk-midnight border-l border-white/[0.06] flex items-center gap-2.5">
+          <span className="text-white/30 uppercase tracking-[0.08em]">Kigali</span>
+          <span className="font-mono text-white/60 tabular-nums">{time}</span>
+        </div>
       </div>
     </div>
   );
