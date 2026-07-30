@@ -1,14 +1,20 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-bk-navy text-white">
+    <footer id="footer" className="bg-bk-navy text-white">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-16">
         <div className="flex flex-col md:flex-row items-start justify-between gap-8">
           {/* Logo + tagline */}
           <div className="max-w-[320px]">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-white rounded-[8px] flex items-center justify-center">
-                <span className="text-bk-blue font-bold text-[13px]">BKC</span>
-              </div>
+              <Image
+                src="/bkc-logo-footer.png"
+                alt="BK Capital"
+                width={32}
+                height={32}
+                className="w-8 h-8 object-contain"
+              />
               <span className="font-semibold text-[16px] leading-[24px]">BK Capital</span>
             </div>
             <p className="text-[14px] leading-[20px] text-white/40">

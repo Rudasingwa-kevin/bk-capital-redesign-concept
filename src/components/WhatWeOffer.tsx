@@ -1,34 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const services = [
   {
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-      </svg>
-    ),
-    title: "Stock Brokerage",
-    desc: "Direct access to the Rwanda Stock Exchange. Buy and sell equities, treasury bills, and bonds with dedicated broker support.",
+    logo: "/aguka-logo.jpg",
+    title: "AGUKA Unit Trust Fund",
+    desc: "An open-ended, tax-exempt fund investing in treasury bills, bank deposits, and corporate debt. Targeting capital protection with liquid returns above the 12-month T-bill yield.",
   },
   {
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: "Fund Management",
-    desc: "AGUKA Unit Trust invests in treasury bills, bank deposits, and corporate debt — targeting capital protection and liquid returns.",
+    logo: "/tekana-logo.jpg",
+    title: "TEKANA Personal Pension",
+    desc: "A voluntary personal pension scheme designed to help individuals build retirement wealth with flexible contribution options and long-term growth.",
   },
   {
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-      </svg>
-    ),
-    title: "Corporate Finance",
-    desc: "Capital raising, debt structuring, and M&A advisory. We co-led Rwanda's first sustainability-linked bond and inaugural Green Bond.",
+    logo: "/bkc-logo.png",
+    title: "Securities Brokerage",
+    desc: "Direct access to the Rwanda Stock Exchange. Trade equities, treasury bills, and bonds with dedicated broker support and institutional-grade research.",
   },
 ];
 
@@ -47,7 +36,7 @@ export default function WhatWeOffer() {
             What We Offer
           </h2>
           <p className="text-[16px] leading-[24px] text-bk-muted mt-4 max-w-[560px]">
-            Three core services, one integrated capital markets partner.
+            Three core products, one integrated capital markets partner.
             BK Capital is licensed by the Capital Market Authority and a member of the Rwanda Stock Exchange.
           </p>
         </motion.div>
@@ -62,8 +51,14 @@ export default function WhatWeOffer() {
               transition={{ duration: 0.4, delay: i * 0.08 }}
               className="bg-white rounded-[20px] border border-bk-border p-6"
             >
-              <div className="w-10 h-10 rounded-[12px] bg-bk-blue/5 flex items-center justify-center text-bk-blue mb-4">
-                {s.icon}
+              <div className="w-12 h-12 rounded-[12px] bg-bk-light flex items-center justify-center mb-4 overflow-hidden">
+                <Image
+                  src={s.logo}
+                  alt={s.title}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <h3 className="text-[16px] leading-[24px] font-semibold text-bk-navy">{s.title}</h3>
               <p className="text-[14px] leading-[20px] text-bk-muted mt-2">{s.desc}</p>
