@@ -1,87 +1,132 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+
+const navItems = [
+  {
+    label: "About Us",
+    id: "about",
+    children: ["Overview", "Mission & Vision", "Leadership", "Partners"],
+  },
+  {
+    label: "Services",
+    id: "services",
+    children: [
+      "Investment & Wealth Management",
+      "Corporate Finance & Advisory",
+      "Securities Brokerage",
+      "Market Research",
+    ],
+  },
+  {
+    label: "Funds",
+    id: "funds",
+    children: ["AGUKA Fund", "TEKANA Fund", "Fund Performance"],
+  },
+  {
+    label: "Research",
+    id: "research",
+    children: ["Market Insights", "Weekly Reports", "Research Notes"],
+  },
+  {
+    label: "News & Events",
+    id: "news",
+    children: ["Latest News", "Events", "Media Gallery"],
+  },
+  { label: "Contacts", id: "contacts" },
+];
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const navItems = [
-    {
-      label: "About Us",
-      id: "about",
-      children: ["Overview", "Mission & Vision", "Leadership", "Partners"],
-    },
-    {
-      label: "Services",
-      id: "services",
-      children: [
-        "Investment & Wealth Management",
-        "Corporate Finance & Advisory",
-        "Securities Brokerage",
-        "Market Research",
-      ],
-    },
-    {
-      label: "Funds",
-      id: "funds",
-      children: ["AGUKA Fund", "TEKANA Fund", "Fund Performance"],
-    },
-    {
-      label: "Research",
-      id: "research",
-      children: ["Market Insights", "Weekly Reports", "Research Notes"],
-    },
-    {
-      label: "News & Events",
-      id: "news",
-      children: ["Latest News", "Events", "Media Gallery"],
-    },
-    { label: "Contacts", id: "contacts" },
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleEnter = (id: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setDropdown(id);
+  };
+
+  const handleLeave = () => {
+    closeTimer.current = setTimeout(() => setDropdown(null), 100);
+  };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-bk-border shadow-sm">
-      <div className="max-w-[1200px] mx-auto px-6 h-[60px] flex items-center justify-between gap-8">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/97 backdrop-blur-xl border-b border-[#E2E8F0] shadow-[0_1px_4px_rgba(10,22,40,0.06)]"
+          : "bg-white/95 backdrop-blur-md border-b border-transparent"
+      }`}
+    >
+      {/* ── Main Nav Bar ── */}
+      <div className="container-main h-[68px] flex items-center justify-between gap-8">
+        {/* Logo */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          <img src="/bkc-logo.png" alt="BK Capital" className="h-9 w-auto" />
+          <Image
+            src="/bkc-logo.png"
+            alt="BK Capital"
+            width={140}
+            height={36}
+            className="h-9 w-auto object-contain"
+            priority
+          />
         </div>
 
-        <nav className="hidden lg:flex items-center gap-0.5">
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
           {navItems.map((item) => (
             <div
               key={item.id}
               className="relative"
-              onMouseEnter={() => setDropdown(item.id)}
-              onMouseLeave={() => setDropdown(null)}
+              onMouseEnter={() => handleEnter(item.id)}
+              onMouseLeave={handleLeave}
             >
-              <button className="flex items-center gap-1 px-3 py-2 text-[13px] font-medium text-bk-text hover:text-bk-blue transition-colors">
+              <button
+                id={`nav-${item.id}`}
+                aria-expanded={dropdown === item.id}
+                aria-haspopup={item.children ? "true" : undefined}
+                className={`flex items-center gap-1.5 px-3.5 py-2.5 text-[13px] font-[450] rounded-lg transition-all duration-200 relative ${
+                  dropdown === item.id
+                    ? "text-[#1747A1] bg-[#F0F5FF]"
+                    : "text-[#3D4F61] hover:text-[#1747A1] hover:bg-[#F7F8FA]"
+                }`}
+              >
                 {item.label}
                 {item.children && (
                   <svg
-                    className={`w-3 h-3 transition-transform ${
+                    className={`w-3 h-3 transition-transform duration-200 opacity-60 ${
                       dropdown === item.id ? "rotate-180" : ""
                     }`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}
+                    strokeWidth={2.5}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 )}
               </button>
+
+              {/* Dropdown */}
               {item.children && dropdown === item.id && (
-                <div className="absolute top-full left-0 bg-white border border-bk-border rounded-lg shadow-lg py-1 min-w-[220px] z-50">
+                <div
+                  className="absolute top-full left-0 mt-1.5 bg-white border border-[#E2E8F0] rounded-2xl shadow-[0_8px_32px_rgba(10,22,40,0.12)] py-2 min-w-[230px] z-50"
+                  style={{ animation: "fadeUp 0.2s cubic-bezier(0.25,0.46,0.45,0.94) both" }}
+                >
                   {item.children.map((child) => (
                     <a
                       key={child}
                       href="#"
-                      className="block px-4 py-2 text-[13px] text-bk-muted hover:text-bk-blue hover:bg-bk-light transition-colors"
+                      className="flex items-center gap-3 px-4 py-2.5 text-[13px] font-[450] text-[#5A6A7A] hover:text-[#1747A1] hover:bg-[#F7F8FA] transition-all duration-150 mx-1 rounded-xl"
                     >
+                      <span className="w-1 h-1 rounded-full bg-[#CBD5E1] flex-shrink-0" />
                       {child}
                     </a>
                   ))}
@@ -91,69 +136,61 @@ export default function Navigation() {
           ))}
         </nav>
 
+        {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <a
             href="#"
-            className="bg-bk-gold hover:bg-bk-gold-hover text-bk-navy px-5 py-2 text-[13px] font-semibold rounded transition-colors"
+            className="btn-primary text-[12.5px] tracking-[0.06em] uppercase"
+            id="nav-online-services-cta"
           >
-            ONLINE SERVICES
+            Online Services
           </a>
         </div>
 
+        {/* Mobile menu toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 text-bk-text"
+          className="lg:hidden p-2 rounded-lg text-[#3D4F61] hover:bg-[#F7F8FA] transition-colors"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
         >
           {open ? (
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
         </button>
       </div>
 
+      {/* ── Mobile Menu ── */}
       {open && (
-        <div className="lg:hidden bg-white border-t border-bk-border">
-          <div className="px-6 py-4 space-y-3">
+        <div
+          className="lg:hidden bg-white border-t border-[#E2E8F0]"
+          style={{ animation: "fadeUp 0.2s ease both" }}
+        >
+          <div className="container-main py-5 space-y-1">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href="#"
-                className="block text-[14px] font-medium text-bk-text hover:text-bk-blue"
+                className="block px-4 py-3 text-[14px] font-[450] text-[#3D4F61] hover:text-[#1747A1] hover:bg-[#F7F8FA] rounded-xl transition-all"
               >
                 {item.label}
               </a>
             ))}
-            <a
-              href="#"
-              className="block bg-bk-gold text-bk-navy px-5 py-2.5 text-[13px] font-semibold rounded text-center mt-4"
-            >
-              ONLINE SERVICES
-            </a>
+            <div className="pt-4">
+              <a
+                href="#"
+                className="btn-primary w-full justify-center text-[12.5px] tracking-[0.06em] uppercase"
+                id="nav-mobile-online-services-cta"
+              >
+                Online Services
+              </a>
+            </div>
           </div>
         </div>
       )}
