@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-/* ─── Data ─── */
 const stats = [
   { label: "Year-to-Date Return", value: "12.4%", sub: "+2.1% vs benchmark", up: true },
   { label: "Assets Under Management", value: "FRw 130.8B", sub: "+18.3% year-on-year", up: true },
@@ -20,7 +19,6 @@ const chartData = [
 
 const timeframes = ["6M", "1Y", "3Y", "ALL"];
 
-/* ─── Chart (SVG) ─── */
 function Chart() {
   const W = 800, H = 200, P = { t: 20, r: 20, b: 32, l: 40 };
   const cW = W - P.l - P.r, cH = H - P.t - P.b;
@@ -73,14 +71,12 @@ function Chart() {
   );
 }
 
-/* ─── Component ─── */
 export default function PerformanceDashboard() {
   const [activeTimeframe, setActiveTimeframe] = useState("1Y");
 
   return (
     <section id="research" className="bg-white">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        {/* Section header */}
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 pt-32 pb-24 lg:pt-40 lg:pb-32">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,8 +89,8 @@ export default function PerformanceDashboard() {
           </h2>
         </motion.div>
 
-        {/* Stats */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Stats — borderless, editorial style */}
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -102,7 +98,7 @@ export default function PerformanceDashboard() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-bk-light rounded-[20px] border border-bk-border p-6"
+              className="pb-6 border-b border-bk-border"
             >
               <div className="text-[12px] leading-[16px] text-bk-muted">{s.label}</div>
               <div className="text-[28px] leading-[36px] font-bold text-bk-navy tracking-[-0.01em] mt-2">
@@ -119,14 +115,14 @@ export default function PerformanceDashboard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-6 bg-bk-light rounded-[20px] border border-bk-border p-6 lg:p-8"
+          className="mt-10 bg-bk-light rounded-[20px] border border-bk-border p-6 lg:p-8"
         >
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="text-[16px] leading-[24px] font-semibold text-bk-navy">AGUKA Unit Trust — 12 Month</h3>
               <p className="text-[12px] leading-[16px] text-bk-muted mt-1">Net of fees, in RWF</p>
             </div>
-            <div className="flex gap-1">
+            <div className="flex gap-1 flex-shrink-0">
               {timeframes.map((tf) => (
                 <button
                   key={tf}

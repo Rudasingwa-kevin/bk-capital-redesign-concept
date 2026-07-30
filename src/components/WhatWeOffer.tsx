@@ -6,17 +6,17 @@ const services = [
   {
     iconPath: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     title: "AGUKA Unit Trust Fund",
-    desc: "An open-ended, tax-exempt fund investing in treasury bills, bank deposits, and corporate debt. Targeting capital protection with liquid returns above the 12-month T-bill yield.",
+    desc: "An open-ended, tax-exempt fund investing in treasury bills, bank deposits, and corporate debt. Targeting capital protection with liquid returns.",
   },
   {
     iconPath: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z",
     title: "TEKANA Personal Pension",
-    desc: "A voluntary personal pension scheme designed to help individuals build retirement wealth with flexible contribution options and long-term growth potential.",
+    desc: "A voluntary personal pension scheme designed to help individuals build retirement wealth with flexible contributions.",
   },
   {
     iconPath: "M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941",
     title: "Securities Brokerage",
-    desc: "Direct access to the Rwanda Stock Exchange. Trade equities, treasury bills, and bonds with dedicated broker support and institutional-grade research.",
+    desc: "Direct access to the Rwanda Stock Exchange. Trade equities, treasury bills, and bonds with dedicated broker support.",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function WhatWeOffer() {
                 <ServiceIcon path={s.iconPath} />
               </div>
               <h3 className="text-[16px] leading-[24px] font-semibold text-bk-navy">{s.title}</h3>
-              <p className="text-[14px] leading-[20px] text-bk-muted mt-2 flex-1">{s.desc}</p>
+              <p className="text-[14px] leading-[20px] text-bk-muted mt-2 pb-4 flex-1">{s.desc}</p>
             </motion.div>
           ))}
         </div>

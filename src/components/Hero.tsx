@@ -5,18 +5,14 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="relative bg-bk-navy overflow-hidden">
-      {/* Subtle geometric accents */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] border border-white/[0.04] rounded-full -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-[800px] h-[800px] border border-white/[0.02] rounded-full translate-y-1/3 -translate-x-1/4" />
       </div>
-
-      {/* Gold left accent */}
       <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-bk-gold via-bk-gold/60 to-transparent" />
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8 py-24 lg:py-32">
         <div className="max-w-[640px]">
-          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -29,7 +25,6 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* H1 */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -41,18 +36,16 @@ export default function Hero() {
             <span className="text-bk-gold-soft">Grow with Rwanda.</span>
           </motion.h1>
 
-          {/* Body */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-[16px] leading-[24px] text-white/60 mb-8 max-w-[480px]"
+            className="text-[16px] leading-[24px] text-white/60 mb-10 max-w-[480px]"
           >
             From AGUKA Unit Trust to corporate bond issuances, BK Capital provides
             direct access to Rwanda&apos;s capital markets for individuals and institutions alike.
           </motion.p>
 
-          {/* CTAs — proper button shapes */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -70,14 +63,13 @@ export default function Hero() {
             </a>
             <a
               href="#footer"
-              className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/50 hover:bg-white/5 text-white font-semibold text-[14px] leading-[20px] px-6 py-3 rounded-[8px] transition-colors min-h-[44px]"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 bg-white/[0.08] hover:bg-white/[0.15] hover:border-white/50 text-white font-semibold text-[14px] leading-[20px] px-6 py-3 rounded-[8px] transition-colors min-h-[44px]"
             >
               Speak with an Advisor
             </a>
           </motion.div>
         </div>
 
-        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

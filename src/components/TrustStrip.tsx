@@ -36,14 +36,14 @@ export default function TrustStrip() {
           {partners.map((p) => (
             <div
               key={p.alt}
-              className="w-20 h-20 md:w-24 md:h-24 rounded-[16px] bg-white border border-bk-border flex items-center justify-center overflow-hidden flex-shrink-0"
+              className="w-20 h-20 md:w-24 md:h-24 rounded-[16px] bg-white border border-bk-border flex items-center justify-center overflow-hidden flex-shrink-0 p-3"
             >
               <Image
                 src={p.src}
                 alt={p.alt}
-                width={96}
-                height={96}
-                className="w-[60%] h-[60%] object-contain"
+                width={72}
+                height={72}
+                className="w-full h-full object-contain"
               />
             </div>
           ))}
