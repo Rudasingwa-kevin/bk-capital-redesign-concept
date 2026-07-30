@@ -2,9 +2,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Colors */
   --color-bk-blue: #034EA2;
-  --color-bk-blue-hover: #023A7A;
   --color-bk-navy: #071A2F;
   --color-bk-midnight: #0E2745;
   --color-bk-gold: #C9A227;
@@ -14,44 +12,32 @@
   --color-bk-text: #111827;
   --color-bk-muted: #6B7280;
   --color-bk-border: #E5E7EB;
-
-  /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-/* ─── Design Tokens ───
+/* ──────────────────────────────────────────────
+   DESIGN SYSTEM
+
    Spacing scale:  4 | 8 | 12 | 16 | 20 | 24 | 32 | 40 | 48 | 64 | 96
-   Card system:    radius 20px, border 1px #E5E7EB, shadow 0 1px 3px rgba(0,0,0,0.06), bg white
+   Container:      max-w-[1200px], mx-auto, px-6 lg:px-8
+   Card:           rounded-[20px], border border-bk-border, p-6
    Typography:     H1 48/56  H2 32/40  H3 20/28  Body 16/24  Caption 12/16
-   Container:      max-w-[1200px] centered, px-6 mobile / px-8 desktop
-*/
+   Nav height:     64px (h-16)
+   Section py:     96px (py-24) standard, 128px (py-32) large
+────────────────────────────────────────────── */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans);
   color: var(--color-bk-text);
   background: var(--color-bk-white);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ticker animation */
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.ticker-animate {
-  animation: ticker-scroll 40s linear infinite;
-}
-.ticker-animate:hover {
-  animation-play-state: paused;
-}
+.ticker-animate { animation: ticker-scroll 40s linear infinite; }
+.ticker-animate:hover { animation-play-state: paused; }

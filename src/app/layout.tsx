@@ -9,31 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "BK Capital - Leading Investment Bank & Fund Manager in Rwanda",
+  title: "BK Capital — Leading Investment Bank & Fund Manager in Rwanda",
   description:
-    "BK Capital, a leading investment bank and fund manager in Rwanda offering Stock Brokerage, Fund Management & Administration, and Corporate Finance and Advisory services.",
-  keywords: [
-    "investment bank Rwanda",
-    "fund manager Rwanda",
-    "stock brokerage Rwanda",
-    "corporate finance Rwanda",
-    "wealth management Rwanda",
-    "BK Capital",
-  ],
-  openGraph: {
-    title: "BK Capital - Leading Investment Bank & Fund Manager in Rwanda",
-    description:
-      "Institutional-grade investment products, wealth management, and corporate advisory services.",
-    type: "website",
-    url: "https://bkcapital.rw",
-  },
+    "Securities brokerage, fund management, and corporate finance advisory. BK Capital is a subsidiary of BK Group PLC, licensed by the Capital Market Authority of Rwanda.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
       <body className="min-h-full flex flex-col font-[var(--font-inter)] antialiased">
