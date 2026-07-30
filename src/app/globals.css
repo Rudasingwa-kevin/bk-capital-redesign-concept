@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme inline {
+  /* Colors */
   --color-bk-blue: #034EA2;
-  --color-bk-blue-dark: #023A7A;
+  --color-bk-blue-hover: #023A7A;
   --color-bk-navy: #071A2F;
   --color-bk-midnight: #0E2745;
   --color-bk-gold: #C9A227;
@@ -13,13 +14,17 @@
   --color-bk-text: #111827;
   --color-bk-muted: #6B7280;
   --color-bk-border: #E5E7EB;
-  --color-bk-card: #FFFFFF;
-  --color-bk-surface: #F9FAFB;
 
-  --font-heading: 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Sans', monospace;
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
+
+/* ─── Design Tokens ───
+   Spacing scale:  4 | 8 | 12 | 16 | 20 | 24 | 32 | 40 | 48 | 64 | 96
+   Card system:    radius 20px, border 1px #E5E7EB, shadow 0 1px 3px rgba(0,0,0,0.06), bg white
+   Typography:     H1 48/56  H2 32/40  H3 20/28  Body 16/24  Caption 12/16
+   Container:      max-w-[1200px] centered, px-6 mobile / px-8 desktop
+*/
 
 * {
   margin: 0;
@@ -32,82 +37,21 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   color: var(--color-bk-text);
   background: var(--color-bk-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-bk-light);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-bk-blue);
-  border-radius: 3px;
-}
-
-/* Market ticker animation */
+/* Ticker animation */
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 .ticker-animate {
   animation: ticker-scroll 40s linear infinite;
 }
-
 .ticker-animate:hover {
   animation-play-state: paused;
-}
-
-/* Subtle gradient overlay for hero */
-.hero-gradient {
-  background: linear-gradient(135deg, rgba(3, 78, 162, 0.92) 0%, rgba(7, 26, 47, 0.95) 50%, rgba(14, 39, 69, 0.98) 100%);
-}
-
-/* Card hover lift */
-.card-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* Gold underline accent */
-.gold-underline {
-  position: relative;
-}
-.gold-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 48px;
-  height: 3px;
-  background: var(--color-bk-gold);
-  border-radius: 2px;
-}
-
-/* Section divider */
-.section-divider {
-  width: 64px;
-  height: 3px;
-  background: var(--color-bk-gold);
-  border-radius: 2px;
-}
-
-/* Stat counter animation */
-@keyframes count-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.stat-animate {
-  animation: count-up 0.6s ease-out forwards;
 }

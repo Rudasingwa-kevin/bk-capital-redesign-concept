@@ -2,8 +2,6 @@ import MarketTicker from "@/components/MarketTicker";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import PerformanceDashboard from "@/components/PerformanceDashboard";
-import InvestmentProducts from "@/components/InvestmentProducts";
-import TrustSection from "@/components/TrustSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -13,8 +11,6 @@ export default function Home() {
       <Navigation />
       <Hero />
       <PerformanceDashboard />
-      <InvestmentProducts />
-      <TrustSection />
       <Footer />
     </main>
   );
