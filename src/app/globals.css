@@ -1,61 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --color-bk-blue: #034EA2;
-  --color-bk-navy: #071A2F;
-  --color-bk-midnight: #0E2745;
-  --color-bk-gold: #C9A227;
-  --color-bk-gold-soft: #E4C86A;
-  --color-bk-light: #F4F5F8;
+  --color-bk-blue: #1747A1;
+  --color-bk-blue-dark: #12367A;
+  --color-bk-navy: #0A1628;
+  --color-bk-gold: #F5AB3C;
+  --color-bk-gold-hover: #E8A035;
+  --color-bk-light: #F3F3F3;
   --color-bk-white: #FFFFFF;
-  --color-bk-text: #111827;
-  --color-bk-muted: #6B7280;
-  --color-bk-border: #E5E7EB;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-bk-text: #222222;
+  --color-bk-muted: #666666;
+  --color-bk-border: #E0E0E0;
+  --font-sans: 'Poppins', system-ui, sans-serif;
 }
-
-/*
-  ══════════════════════════════════════════════════════════════
-  BK CAPITAL — DESIGN SYSTEM v2
-  ══════════════════════════════════════════════════════════════
-
-  GRID:        8px base unit
-  CONTAINER:   max-w-[1200px], mx-auto, px-6 lg:px-8
-  RADIUS:      sm 8px | md 12px | lg 16px | xl 20px | 2xl 24px
-  SHADOW:      sm 0 1px 2px rgba(0,0,0,0.05)
-               md 0 4px 12px rgba(0,0,0,0.06)
-               lg 0 8px 24px rgba(0,0,0,0.08)
-  BORDER:      1px solid #E5E7EB
-
-  TYPOGRAPHY:
-    Display    60px / 64px  -0.03em  800
-    H1         48px / 56px  -0.02em  700
-    H2         36px / 44px  -0.01em  700
-    H3         20px / 28px   0        600
-    Body Lg    18px / 28px   0        400
-    Body       16px / 24px   0        400
-    Body Sm    14px / 20px   0        400
-    Caption    12px / 16px   0        500
-    Overline   11px / 16px   0.1em    600
-
-  SPACING:     4 | 8 | 12 | 16 | 20 | 24 | 32 | 40 | 48 | 64 | 80 | 96 | 128
-  ══════════════════════════════════════════════════════════════
-*/
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-
 body {
   font-family: var(--font-sans);
   color: var(--color-bk-text);
   background: var(--color-bk-white);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
-/* Ticker */
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -63,8 +31,4 @@ body {
 .ticker-scroll { animation: ticker-scroll 45s linear infinite; }
 .ticker-scroll:hover { animation-play-state: paused; }
 
-/* Selection */
-::selection {
-  background: rgba(3, 78, 162, 0.15);
-  color: inherit;
-}
+::selection { background: rgba(23, 71, 161, 0.15); }

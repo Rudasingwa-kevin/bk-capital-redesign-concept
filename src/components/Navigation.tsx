@@ -1,66 +1,108 @@
 "use client";
-
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Performance", href: "#performance" },
-  { label: "Contact", href: "#contact" },
-];
+import { useState } from "react";
 
 export default function Navigation() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [dropdown, setDropdown] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
+  const navItems = [
+    {
+      label: "About Us",
+      id: "about",
+      children: ["Overview", "Mission & Vision", "Leadership", "Partners"],
+    },
+    {
+      label: "Services",
+      id: "services",
+      children: [
+        "Investment & Wealth Management",
+        "Corporate Finance & Advisory",
+        "Securities Brokerage",
+        "Market Research",
+      ],
+    },
+    {
+      label: "Publications",
+      id: "publications",
+      children: ["Weekly Insights", "Monthly Reports", "Research Notes"],
+    },
+    {
+      label: "News & Events",
+      id: "news",
+      children: ["Latest News", "Events", "Media Gallery"],
+    },
+    { label: "Contacts", id: "contacts" },
+  ];
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 border-b ${scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.04)] border-bk-border" : "bg-white border-transparent"}`}>
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[64px]">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-3 flex-shrink-0">
-            <Image src="/bkc-logo.png" alt="BK Capital" width={32} height={32} className="w-8 h-8 object-contain" priority />
-            <span className="font-bold text-bk-navy text-[15px] leading-[20px] tracking-[-0.01em] hidden sm:block">BK Capital</span>
-          </a>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center">
-            {navLinks.map((l) => (
-              <a key={l.label} href={l.href} className="px-5 py-2 text-[13px] font-medium text-bk-muted/80 hover:text-bk-navy transition-colors duration-200">{l.label}</a>
-            ))}
-          </div>
-
-          {/* CTA + mobile */}
-          <div className="flex items-center gap-4">
-            <a href="https://onboarding.bkcapital.rw/" className="hidden md:inline-flex items-center bg-bk-gold hover:bg-bk-gold-soft text-bk-navy font-semibold text-[12px] leading-[16px] tracking-[0.02em] uppercase px-5 py-2.5 rounded-[8px] transition-all duration-200 hover:shadow-[0_2px_8px_rgba(201,162,39,0.3)]">Investor Portal</a>
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 -mr-2 text-bk-muted" aria-label="Menu">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                {mobileOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />}
-              </svg>
-            </button>
-          </div>
+    <header className="sticky top-0 z-50 bg-white border-b border-bk-border shadow-sm">
+      <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <img src="/bkc-logo.png" alt="BK Capital" className="h-10 w-auto" />
         </div>
+
+        <nav className="hidden lg:flex items-center gap-1">
+          {navItems.map((item) => (
+            <div
+              key={item.id}
+              className="relative"
+              onMouseEnter={() => setDropdown(item.id)}
+              onMouseLeave={() => setDropdown(null)}
+            >
+              <button className="flex items-center gap-1 px-3 py-2 text-[13px] font-medium text-bk-text hover:text-bk-blue transition-colors">
+                {item.label}
+                {item.children && (
+                  <svg className={`w-3 h-3 transition-transform ${dropdown === item.id ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </button>
+              {item.children && dropdown === item.id && (
+                <div className="absolute top-full left-0 bg-white border border-bk-border rounded-lg shadow-lg py-1 min-w-[220px] z-50">
+                  {item.children.map((child) => (
+                    <a key={child} href="#" className="block px-4 py-2 text-[13px] text-bk-muted hover:text-bk-blue hover:bg-bk-light transition-colors">
+                      {child}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+
+        <div className="hidden lg:flex items-center gap-3">
+          <a href="#" className="bg-bk-gold hover:bg-bk-gold-hover text-bk-navy px-5 py-2 text-[13px] font-semibold rounded transition-colors">
+            ONLINE SERVICES
+          </a>
+        </div>
+
+        <button onClick={() => setOpen(!open)} className="lg:hidden p-2 text-bk-text">
+          {open ? (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="md:hidden overflow-hidden bg-white border-t border-bk-border">
-            <div className="px-6 py-4 space-y-1">
-              {navLinks.map((l) => (
-                <a key={l.label} href={l.href} className="block px-4 py-3 text-[14px] font-medium text-bk-muted hover:text-bk-navy hover:bg-bk-light/60 rounded-[8px] transition-colors" onClick={() => setMobileOpen(false)}>{l.label}</a>
-              ))}
-              <a href="https://onboarding.bkcapital.rw/" className="block text-center bg-bk-gold text-bk-navy font-semibold text-[12px] uppercase tracking-[0.02em] px-4 py-3 rounded-[8px] mt-3" onClick={() => setMobileOpen(false)}>Investor Portal</a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+      {open && (
+        <div className="lg:hidden bg-white border-t border-bk-border">
+          <div className="px-6 py-4 space-y-3">
+            {navItems.map((item) => (
+              <a key={item.id} href="#" className="block text-[14px] font-medium text-bk-text hover:text-bk-blue">
+                {item.label}
+              </a>
+            ))}
+            <a href="#" className="block bg-bk-gold text-bk-navy px-5 py-2.5 text-[13px] font-semibold rounded text-center mt-4">
+              ONLINE SERVICES
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
