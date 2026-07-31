@@ -2,65 +2,47 @@
 import { motion } from "framer-motion";
 
 const reports = [
-  { tag: "Weekly Insight", date: "Jul 22, 2025", title: "RSE Equity Market Capitalization Reaches FRw 6,588B", summary: "Total equity market cap increased 7.5% in Q2, led by gains in BK Group and Bralirwa.", metric: "+7.5%", metricLabel: "Q2 Market Cap", color: "text-up" },
-  { tag: "Fund Report", date: "Jul 15, 2025", title: "AGUKA Monthly Performance: 8.3% Annualized Return", summary: "Outperforming the 91-day Treasury bill rate by 210 basis points.", metric: "8.3%", metricLabel: "Annual Return", color: "text-gold" },
-  { tag: "Research Note", date: "Jul 10, 2025", title: "Rwanda Capital Markets: H2 2025 Outlook", summary: "Continued growth driven by foreign portfolio investment and new RSE listings.", metric: "+12%", metricLabel: "Projected Growth", color: "text-blue" },
-  { tag: "Weekly Insight", date: "Jul 08, 2025", title: "Government Bond Auction: Yields at 14.2%", summary: "Strong demand across all tenors, 7-year bond clearing at 14.2%.", metric: "14.2%", metricLabel: "7Y Bond Yield", color: "text-blue" },
+  { tag: "Weekly", date: "Jul 22", title: "RSE Equity Market Cap Reaches FRw 6,588B", metric: "+7.5%", color: "text-emerald-500" },
+  { tag: "Fund", date: "Jul 15", title: "AGUKA Monthly: 8.3% Annualized Return", metric: "8.3%", color: "text-gold" },
+  { tag: "Research", date: "Jul 10", title: "Rwanda Capital Markets: H2 2025 Outlook", metric: "+12%", color: "text-blue" },
+  { tag: "Weekly", date: "Jul 08", title: "Government Bond Auction: Yields at 14.2%", metric: "14.2%", color: "text-blue" },
 ];
 
-const tagColors: Record<string, string> = {
-  "Weekly Insight": "bg-blue/5 text-blue",
-  "Fund Report": "bg-gold/5 text-gold",
-  "Research Note": "bg-navy-800/5 text-navy-800",
+const tagStyle: Record<string, string> = {
+  Weekly: "bg-blue/5 text-blue",
+  Fund: "bg-gold/5 text-gold",
+  Research: "bg-gray-100 text-gray-600",
 };
 
 export default function Research() {
   return (
-    <section id="research" className="bg-white section-py">
-      <div className="container-site">
-        <div className="flex items-end justify-between mb-10 gap-6">
+    <section className="bg-white py-20 lg:py-28">
+      <div className="container-n">
+        <div className="flex items-end justify-between mb-10">
           <div>
-            <div className="eyebrow">Research &amp; Insights</div>
-            <h2 className="display-lg text-slate-900">Market Intelligence</h2>
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="w-5 h-[1.5px] bg-gold" />
+              <span className="text-gold text-[10px] font-semibold uppercase tracking-[0.2em]">Research</span>
+            </div>
+            <h2 className="text-[clamp(28px,4vw,44px)] font-bold text-gray-900 leading-tight tracking-tight">Market Intelligence</h2>
           </div>
-          <span className="hidden md:inline-flex text-[12px] font-semibold text-blue hover:text-blue/70 transition-colors cursor-pointer">
-            All Reports →
-          </span>
+          <span className="hidden sm:inline text-[12px] font-semibold text-blue hover:text-blue-light transition-colors cursor-pointer">All Reports &rarr;</span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-3">
           {reports.map((r, i) => (
-            <motion.article
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="card p-5 group cursor-pointer flex gap-4"
-            >
-              {/* Metric sidebar */}
-              <div className="flex-shrink-0 flex flex-col items-center w-[56px]">
-                <div className={`text-[18px] font-bold leading-none ${r.color}`} style={{ fontVariantNumeric: "tabular-nums" }}>
-                  {r.metric}
+            <motion.article key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.05 }} className="bg-white border border-gray-200 rounded-2xl p-5 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer group">
+              <div className="flex gap-4">
+                <div className="text-right flex-shrink-0 w-14">
+                  <div className={`text-lg font-bold ${r.color} tabular-nums`}>{r.metric}</div>
                 </div>
-                <div className="text-[8px] text-slate-400 uppercase tracking-[0.06em] mt-1 text-center leading-snug font-medium">
-                  {r.metricLabel}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className={`text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded ${tagStyle[r.tag]}`}>{r.tag}</span>
+                    <span className="text-[10px] text-gray-400">{r.date}</span>
+                  </div>
+                  <h3 className="text-[13px] font-semibold text-gray-900 leading-snug group-hover:text-blue transition-colors">{r.title}</h3>
                 </div>
-                <div className="flex-1 w-px bg-slate-100 mt-2.5 group-hover:bg-blue/15 transition-colors" />
-              </div>
-
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`text-[9px] font-semibold uppercase tracking-[0.06em] px-1.5 py-0.5 rounded ${tagColors[r.tag] || "bg-slate-100 text-slate-500"}`}>
-                    {r.tag}
-                  </span>
-                  <span className="text-[10px] text-slate-400">{r.date}</span>
-                </div>
-                <h3 className="text-[13.5px] font-semibold text-slate-900 mb-1 leading-snug group-hover:text-blue transition-colors">
-                  {r.title}
-                </h3>
-                <p className="text-[12px] text-slate-500 leading-relaxed line-clamp-2">{r.summary}</p>
               </div>
             </motion.article>
           ))}

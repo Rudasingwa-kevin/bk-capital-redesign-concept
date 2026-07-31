@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
+import HeroInner from "@/components/HeroInner";
 
 export const metadata: Metadata = {
   title: "Funds",
-  description:
-    "Invest in AGUKA and TEKANA funds — professionally managed investment funds by BK Capital in Rwanda.",
+  description: "Invest in AGUKA and TEKANA funds — professionally managed by BK Capital.",
 };
 
 const funds = [
@@ -12,124 +11,76 @@ const funds = [
     id: "aguka",
     name: "AGUKA Fund",
     type: "Money Market & Equity Unit Trust",
-    returnLabel: "8.3%",
-    returnSub: "Annualized Return",
-    minInvestment: "RWF 5,000",
-    desc: "A diversified unit trust fund designed for investors seeking stable returns with moderate risk. AGUKA invests in a mix of money market instruments and equities listed on the Rwanda Stock Exchange.",
-    features: [
-      "Professional fund management",
-      "Diversified portfolio across money market and equities",
-      "Low minimum investment — accessible to all",
-      "Regular income distributions",
-      "Transparent reporting and NAV updates",
-    ],
-    allocation: [
-      { label: "Money Market Instruments", pct: 55 },
-      { label: "Listed Equities", pct: 30 },
-      { label: "Government Securities", pct: 15 },
-    ],
+    ret: "8.3%",
+    retLabel: "Annualized Return",
+    min: "RWF 5,000",
+    desc: "A diversified unit trust for stable returns with moderate risk. Invests in money market instruments and RSE-listed equities.",
+    features: ["Professional management", "Diversified portfolio", "Low minimum", "Regular distributions", "Transparent reporting"],
+    alloc: [{ l: "Money Market", p: 55 }, { l: "Listed Equities", p: 30 }, { l: "Govt Securities", p: 15 }],
   },
   {
     id: "tekana",
     name: "TEKANA Fund",
     type: "Personal Pension Plan",
-    returnLabel: "+42%",
-    returnSub: "Since Inception",
-    minInvestment: "RWF 10,000",
-    desc: "A long-term equity-focused pension fund for investors building wealth for retirement. TEKANA invests primarily in top-performing companies listed on the Rwanda Stock Exchange.",
-    features: [
-      "Long-term capital appreciation",
-      "Equity-focused strategy for growth",
-      "Tax-advantaged pension structure",
-      "Suitable for retirement planning",
-      "Managed by licensed investment professionals",
-    ],
-    allocation: [
-      { label: "Listed Equities", pct: 70 },
-      { label: "Government Bonds", pct: 20 },
-      { label: "Cash & Money Market", pct: 10 },
-    ],
+    ret: "+42%",
+    retLabel: "Since Inception",
+    min: "RWF 10,000",
+    desc: "Long-term equity-focused pension fund for retirement wealth building. Primarily invests in top RSE-listed companies.",
+    features: ["Capital appreciation", "Equity-focused", "Tax advantages", "Retirement planning", "Licensed professionals"],
+    alloc: [{ l: "Listed Equities", p: 70 }, { l: "Govt Bonds", p: 20 }, { l: "Cash", p: 10 }],
   },
 ];
 
 export default function FundsPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Investment Funds"
-        title="Grow Your Wealth"
-        description="Professionally managed investment funds designed to meet your financial goals — from short-term savings to long-term retirement planning."
-      />
-
-      <section className="bg-white section-py">
-        <div className="container-site">
-          <div className="space-y-6">
-            {funds.map((f) => (
-              <div key={f.id} id={f.id} className="card overflow-hidden scroll-mt-20">
-                <div className="flex flex-col lg:flex-row">
-                  {/* Metric panel */}
-                  <div className="lg:w-[280px] bg-navy-950 p-7 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-center gap-4">
-                    <div>
-                      <p className="text-[10px] text-white/40 uppercase tracking-[0.12em] font-medium mb-1">{f.type}</p>
-                      <h2 className="text-[20px] font-bold text-white mb-1">{f.name}</h2>
-                    </div>
-                    <div className="text-right lg:text-left">
-                      <div className="text-[28px] font-bold text-gold leading-none" style={{ fontVariantNumeric: "tabular-nums" }}>
-                        {f.returnLabel}
-                      </div>
-                      <div className="text-[10px] text-white/40 mt-1">{f.returnSub}</div>
-                    </div>
+      <HeroInner title="Investment Funds" desc="Professionally managed funds for every financial goal." />
+      <section className="bg-white py-20 lg:py-28">
+        <div className="container-n space-y-5">
+          {funds.map((f) => (
+            <div key={f.id} id={f.id} className="bg-white border border-gray-200 rounded-2xl overflow-hidden scroll-mt-20">
+              <div className="flex flex-col lg:flex-row">
+                <div className="lg:w-64 bg-navy-deep p-6 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-center gap-3">
+                  <div>
+                    <p className="text-[9px] text-white/30 uppercase tracking-widest mb-0.5">{f.type}</p>
+                    <h2 className="text-lg font-bold text-white">{f.name}</h2>
                   </div>
-
-                  {/* Content */}
-                  <div className="flex-1 p-7">
-                    <p className="text-[14px] text-slate-500 leading-relaxed mb-5">{f.desc}</p>
-
-                    <div className="grid sm:grid-cols-2 gap-2 mb-6">
-                      {f.features.map((feat, j) => (
-                        <div key={j} className="flex items-center gap-2.5 text-[13px] text-slate-600">
-                          <svg className="w-4 h-4 text-blue flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                          {feat}
+                  <div className="text-right lg:text-left">
+                    <div className="text-2xl font-bold text-gold tabular-nums">{f.ret}</div>
+                    <div className="text-[9px] text-white/30 mt-0.5">{f.retLabel}</div>
+                  </div>
+                </div>
+                <div className="flex-1 p-6">
+                  <p className="text-[13px] text-gray-500 leading-relaxed mb-4">{f.desc}</p>
+                  <div className="grid sm:grid-cols-2 gap-2 mb-5">
+                    {f.features.map((feat, j) => (
+                      <div key={j} className="flex items-center gap-2 text-[12px] text-gray-600">
+                        <svg className="w-3.5 h-3.5 text-blue shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        {feat}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="space-y-2 mb-5">
+                    {f.alloc.map((a, j) => (
+                      <div key={j}>
+                        <div className="flex justify-between mb-0.5">
+                          <span className="text-[11px] text-gray-500">{a.l}</span>
+                          <span className="text-[11px] font-semibold text-gray-900">{a.p}%</span>
                         </div>
-                      ))}
-                    </div>
-
-                    {/* Allocation bars */}
-                    <div>
-                      <h3 className="text-[11px] text-slate-400 uppercase tracking-[0.1em] font-semibold mb-3">Asset Allocation</h3>
-                      <div className="space-y-2.5">
-                        {f.allocation.map((a, j) => (
-                          <div key={j}>
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[12px] text-slate-600">{a.label}</span>
-                              <span className="text-[12px] font-semibold text-slate-900">{a.pct}%</span>
-                            </div>
-                            <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-blue rounded-full"
-                                style={{ width: `${a.pct}%` }}
-                              />
-                            </div>
-                          </div>
-                        ))}
+                        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue rounded-full" style={{ width: `${a.p}%` }} />
+                        </div>
                       </div>
-                    </div>
-
-                    <div className="mt-6 flex items-center gap-4">
-                      <div className="text-[12px] text-slate-400">
-                        Minimum: <span className="font-semibold text-slate-700">{f.minInvestment}</span>
-                      </div>
-                      <span className="btn btn-navy text-[12px]">
-                        Invest Now →
-                      </span>
-                    </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                    <span className="text-[11px] text-gray-400">Min: <span className="font-semibold text-gray-700">{f.min}</span></span>
+                    <span className="inline-flex items-center px-4 py-2 text-[12px] font-semibold bg-navy text-white rounded-lg cursor-pointer hover:bg-blue transition-colors">Invest Now &rarr;</span>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
     </>

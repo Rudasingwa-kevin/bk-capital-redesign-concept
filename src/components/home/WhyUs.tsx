@@ -3,112 +3,74 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const stats = [
-  { value: "130.8", prefix: "FRw ", suffix: "B", label: "Assets Under Management" },
-  { value: "12", prefix: "", suffix: "+", label: "Years of Excellence" },
-  { value: "3", prefix: "#0", suffix: "/2018", label: "CMA Licensed" },
-  { value: "14", prefix: "#", suffix: "/2017", label: "RSE Licensed" },
-];
-
-function CountUp({ target, prefix, suffix }: { target: string; prefix: string; suffix: string }) {
+function CountUp({ value, prefix = "", suffix = "" }: { value: string; prefix?: string; suffix?: string }) {
+  const num = parseFloat(value);
+  const dec = value.includes(".") ? value.split(".")[1].replace(/[^0-9]/g, "").length : 0;
   const [display, setDisplay] = useState("0");
   const ref = useRef<HTMLSpanElement>(null);
-  const numericVal = parseFloat(target);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        obs.disconnect();
-        const t0 = performance.now();
-        const dur = 1400;
-        const animate = (now: number) => {
-          const p = Math.min((now - t0) / dur, 1);
-          const ease = 1 - Math.pow(1 - p, 3);
-          const current = numericVal * ease;
-          setDisplay(target.includes(".") ? current.toFixed(1) : Math.round(current).toString());
-          if (p < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-      },
-      { threshold: 0.3 }
-    );
+    const obs = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      obs.disconnect();
+      const t0 = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - t0) / 1200, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        setDisplay(dec ? (num * ease).toFixed(dec) : String(Math.round(num * ease)));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.3 });
     obs.observe(el);
     return () => obs.disconnect();
-  }, [numericVal, target]);
+  }, [num, dec]);
 
-  return (
-    <span ref={ref} style={{ fontVariantNumeric: "tabular-nums" }}>
-      {prefix}{display}{suffix}
-    </span>
-  );
+  return <span ref={ref} className="tabular-nums">{prefix}{display}{suffix}</span>;
 }
+
+const stats = [
+  { value: "130.8", prefix: "FRw ", suffix: "B", label: "Assets Under Management" },
+  { value: "12", suffix: "+", label: "Years of Excellence" },
+  { value: "3", prefix: "#0", suffix: "/2018", label: "CMA Licensed" },
+  { value: "14", prefix: "#", suffix: "/2017", label: "RSE Member" },
+];
 
 export default function WhyUs() {
   return (
-    <section className="relative py-20 overflow-hidden bg-slate-50">
-      {/* Mesh background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at 15% 30%, rgba(23,71,161,0.04) 0%, transparent 50%), radial-gradient(ellipse at 85% 70%, rgba(201,150,58,0.03) 0%, transparent 50%)",
-        }}
-      />
-
-      <div className="container-site relative z-10">
+    <section className="bg-surface py-20 lg:py-28">
+      <div className="container-n">
         <div className="mb-12">
-          <div className="eyebrow">Why BK Capital</div>
-          <h2 className="display-lg text-slate-900 max-w-lg">Credibility you can count on</h2>
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="w-5 h-[1.5px] bg-gold" />
+            <span className="text-gold text-[10px] font-semibold uppercase tracking-[0.2em]">Why BK Capital</span>
+          </div>
+          <h2 className="text-[clamp(28px,4vw,44px)] font-bold text-gray-900 leading-tight tracking-tight">Credibility you can count on</h2>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
           {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="card p-5 group"
-            >
-              <div className="text-[22px] md:text-[26px] font-bold text-blue leading-none mb-1.5">
-                <CountUp target={s.value} prefix={s.prefix} suffix={s.suffix} />
+            <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.05 }} className="bg-white border border-gray-200 rounded-2xl p-5">
+              <div className="text-[22px] lg:text-[26px] font-bold text-blue leading-none mb-1.5">
+                <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
               </div>
-              <div className="text-[12px] font-medium text-slate-500">{s.label}</div>
+              <div className="text-[11px] text-gray-500 font-medium">{s.label}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* BK Group Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="card overflow-hidden"
-        >
-          <div className="flex flex-col md:flex-row items-stretch">
-            <div
-              className="hidden md:block w-1 flex-shrink-0"
-              style={{ background: "linear-gradient(180deg, #1747A1 0%, #C9963A 100%)" }}
-            />
-            <div className="flex flex-col md:flex-row items-center gap-6 p-7 md:p-8 flex-1">
-              <div className="flex-1">
-                <p className="text-[10px] text-gold font-semibold uppercase tracking-[0.14em] mb-1">Parent Company</p>
-                <h3 className="text-[17px] font-bold text-slate-900 mb-2">Backed by BK Group Plc</h3>
-                <p className="text-[13.5px] text-slate-500 leading-relaxed max-w-xl">
-                  As a subsidiary of BK Group Plc — one of Rwanda&apos;s largest financial services conglomerates — BK Capital
-                  combines institutional depth with local market expertise.
-                </p>
-              </div>
-              <div className="flex-shrink-0 w-20 h-20 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center p-3">
-                <Image src="/bk-group-logo.jpg" alt="BK Group Plc" width={56} height={56} className="object-contain" />
-              </div>
-            </div>
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+          <div className="flex-1">
+            <div className="text-[10px] text-gold font-semibold uppercase tracking-widest mb-1">Parent Company</div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">Backed by BK Group Plc</h3>
+            <p className="text-[13px] text-gray-500 leading-relaxed max-w-xl">
+              As a subsidiary of BK Group Plc — one of Rwanda&apos;s largest financial services conglomerates — we combine institutional depth with local expertise.
+            </p>
+          </div>
+          <div className="w-20 h-20 rounded-2xl bg-surface border border-gray-100 flex items-center justify-center p-3 flex-shrink-0">
+            <Image src="/bk-group-logo.jpg" alt="BK Group" width={56} height={56} className="w-full h-full object-contain" />
           </div>
         </motion.div>
       </div>
