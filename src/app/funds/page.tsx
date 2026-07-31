@@ -15,6 +15,7 @@ const funds = [
     retLabel: "Annualized Return",
     min: "RWF 5,000",
     desc: "A diversified unit trust for stable returns with moderate risk. Invests in money market instruments and RSE-listed equities.",
+    video: "/aguka-video.mp4",
     features: ["Professional management", "Diversified portfolio", "Low minimum", "Regular distributions", "Transparent reporting"],
     alloc: [{ l: "Money Market", p: 55 }, { l: "Listed Equities", p: 30 }, { l: "Govt Securities", p: 15 }],
   },
@@ -26,6 +27,7 @@ const funds = [
     retLabel: "Since Inception",
     min: "RWF 10,000",
     desc: "Long-term equity-focused pension fund for retirement wealth building. Primarily invests in top RSE-listed companies.",
+    video: null,
     features: ["Capital appreciation", "Equity-focused", "Tax advantages", "Retirement planning", "Licensed professionals"],
     alloc: [{ l: "Listed Equities", p: 70 }, { l: "Govt Bonds", p: 20 }, { l: "Cash", p: 10 }],
   },
@@ -52,6 +54,22 @@ export default function FundsPage() {
                 </div>
                 <div className="flex-1 p-6">
                   <p className="text-[13px] text-gray-500 leading-relaxed mb-4">{f.desc}</p>
+                  {f.video && (
+                    <div className="mb-5 rounded-xl overflow-hidden border border-gray-100">
+                      <video
+                        src={f.video}
+                        controls
+                        preload="metadata"
+                        className="w-full aspect-video object-cover"
+                        poster=""
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                      <div className="px-3 py-2 bg-surface">
+                        <p className="text-[10px] text-gray-400 uppercase tracking-wider">Watch: How {f.name} works</p>
+                      </div>
+                    </div>
+                  )}
                   <div className="grid sm:grid-cols-2 gap-2 mb-5">
                     {f.features.map((feat, j) => (
                       <div key={j} className="flex items-center gap-2 text-[12px] text-gray-600">
