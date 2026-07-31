@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <Link href="/">
-              <Image src="/bkc-logo-footer.png" alt="BK Capital" width={110} height={28} className="h-7 w-auto brightness-0 invert opacity-80 mb-5" />
+              <Image src="/bkc-logo-footer.png" alt="BK Capital" width={130} height={34} className="h-8 w-auto opacity-90 mb-5" />
             </Link>
             <p className="text-[13px] text-white/40 leading-relaxed max-w-xs mb-6">
               A leading investment bank and fund manager in Rwanda, subsidiary of BK Group Plc.
@@ -46,10 +46,10 @@ export default function Footer() {
         {/* Partners */}
         <div className="mt-14 pt-8 border-t border-white/5">
           <p className="text-[9px] text-white/15 uppercase tracking-[0.2em] font-semibold mb-4">Regulated By</p>
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-5 flex-wrap">
             {["/aguka-logo.jpg", "/tekana-logo.jpg", "/bk-group-logo.jpg", "/cma-logo.jpg", "/rse-logo.jpg"].map((src, i) => (
-              <div key={i} className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center p-1.5 opacity-25 hover:opacity-50 transition-opacity">
-                <Image src={src} alt="" width={24} height={24} className="object-contain w-full h-full brightness-0 invert" />
+              <div key={i} className="w-10 h-10 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center p-2 opacity-50 hover:opacity-80 transition-opacity">
+                <Image src={src} alt="" width={28} height={28} className="object-contain w-full h-full" />
               </div>
             ))}
           </div>
