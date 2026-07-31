@@ -2,13 +2,13 @@
 
 @theme inline {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --color-navy: #0A1628;
-  --color-navy-deep: #060E1A;
-  --color-blue: #1747A1;
-  --color-blue-light: #3B6FD4;
-  --color-gold: #C9963A;
-  --color-gold-light: #E2B05A;
-  --color-surface: #F7F8FA;
+  --color-navy: #011B39;
+  --color-navy-deep: #000F1F;
+  --color-blue: #034EA2;
+  --color-blue-light: #2A6FC4;
+  --color-gold: #EB9C20;
+  --color-gold-light: #F2B64A;
+  --color-surface: #F4F5F8;
   --color-border: #E2E8F0;
 }
 
