@@ -13,7 +13,6 @@ export default function Home() {
       <Pathways />
       <WhyUs />
       <Research />
-      <div className="h-20 bg-gradient-to-b from-white to-navy" />
       <Cta />
     </>
   );
